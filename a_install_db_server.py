@@ -40,7 +40,7 @@ ______________________________________________________________________
 |                                                                     |
 | What do you want to do:                                             |
 |                                                                     |
-| 1 -> Install Oracle Database Server and Create a new empty database |
+| 1 -> Install Oracle Database Software and Create a new database     |
 | 2 -> Create only a new empty database                               |
 | 3 -> Clean everything and install Oracle DB Server and empty db     |
 |_____________________________________________________________________|
@@ -60,16 +60,23 @@ ______________________________________________________________________
 |                                                                     |
 | What version do you want to install ?                               |
 |                                                                     |
-| 1 -> 12c -> 12.1.0.2                                                |
-| 2 -> 19c                                                            |
-| 3 -> 21c                                                            |
+| 1 -> 11							      |
+| 2 -> 12cR1 							      |
+| 3 -> 12cR2                                                          |
+| 4 -> 19c                                                            |
+| 5 -> 21c                                                            |
 |_____________________________________________________________________|
 
 ''')
 
     if int(version) == 1:
-        fullinstall(dbname,"121","121002.zip",syspwd)
+        fullinstall(dbname,"11","112040.zip",syspwd)
     elif int(version) == 2:
+        fullinstall(dbname,"121","121002.zip",syspwd)
+    elif int(version) == 3:
+        fullinstall(dbname,"122","122010.zip",syspwd)
+
+    elif int(version) == 4:
         fullinstall(dbname,"19","193000.zip",syspwd)
     else:
         fullinstall(dbname,"21","213000.zip",syspwd)
@@ -88,16 +95,22 @@ ______________________________________________________________________
 |                                                                     |
 | In what version do you want to create the database ?                |
 |                                                                     |
-| 1 -> 12c -> 12.1.0.2                                                |
-| 2 -> 19c                                                            |
-| 3 -> 21c                                                            |
+| 1 -> 11                                                             |
+| 2 -> 12cR1                                                          |
+| 3 -> 12cR2							      |
+| 4 -> 19c                                                            |
+| 5 -> 21c                                                            |
 |_____________________________________________________________________|
 
 ''')
 
     if int(version) == 1:
-        sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 121"')
+        sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 11"')
     elif int(version) == 2:
+        sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 121"')
+    elif int(version) == 3:
+        sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 122"')
+    elif int(version) == 4:
         sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 19"')
     else:
         sh(f'su - oracle -c "python3 /home/oracle/scripts/h_db_creation.py {dbname} {syspwd} 21"')
@@ -115,15 +128,21 @@ ______________________________________________________________________
 |                                                                     |
 | In what version do you want to create the database ?                |
 |                                                                     |
-| 1 -> 12c -> 12.1.0.2                                                |
-| 2 -> 19c                                                            |
-| 3 -> 21c                                                            |
+| 1 -> 11                                                             |
+| 2 -> 12cR1                                                          |
+| 3 -> 12cR2                                                          |
+| 4 -> 19c                                                            |
+| 5 -> 21c                                                            |
 |_____________________________________________________________________|
 
 ''')
 
     if int(version) == 1:
+        cleanfullinstall(dbname,"11","112040.zip",syspwd)
+    elif int(version) == 2:
         cleanfullinstall(dbname,"121","121002.zip",syspwd)
+    elif int(version) == 2:
+        cleanfullinstall(dbname,"122","122010.zip",syspwd)
     elif int(version) == 2:
         cleanfullinstall(dbname,"19","193000.zip",syspwd)
     else:
